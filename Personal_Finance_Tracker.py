@@ -12,7 +12,7 @@ st.write('Welcome to the app!')
 if "transactions" not in st.session_state:
     if os.path.exists('transactions.csv'):
         df= pd.read_csv('transactions.csv')
-        st.session_stat.transactions = df.to_dict('records')
+        st.session_state.transactions = df.to_dict('records')
     else:
         st.session_state.transactions=[]
 
