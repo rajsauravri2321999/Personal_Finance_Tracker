@@ -10,9 +10,9 @@ st.write('Welcome to the app!')
 
 # Initialize session state
 if "transactions" not in st.session_state:
-    if os.path.exists('transactions.csv'):
-        df= pd.read_csv('transactions.csv')
-        st.session_state.transactions = df.to_dict('records')
+    if os.path.exists("transactions.csv") and os.path.getsize("transactions.csv") > 0:
+        df = pd.read_csv("transactions.csv")
+        st.session_state.transactions = df.to_dict("records")
     else:
         st.session_state.transactions=[]
 
