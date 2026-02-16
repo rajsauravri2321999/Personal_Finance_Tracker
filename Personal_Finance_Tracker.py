@@ -101,13 +101,27 @@ if st.session_state.transactions:
 
     # Delete transactions
     st.subheader('Delete Transactions')
+
     if not filtered_df.empty:
         delete_index = st.number_input(
             'Enter index to delete',
-            min_value = 0,
-            max_value = len(st.session_state.transactions)-1
+            min_value=0,
+            max_value=len(st.session_state.transactions)-1,
+            step=1
         )
-    st.success('Deleted Successfully!')
+
+    if st.button('Delete Transaction'):
+
+        st.session_state.transactions.pop(delete_index)
+
+        # Update CSV
+        pd.DataFrame(st.session_state.transactions).to_csv(
+            'transactions.csv',
+            index=False
+        )
+
+        st.success('Deleted Successfully!')
+        st.rerun()
 
 
     st.subheader('Expense Breakdown')
