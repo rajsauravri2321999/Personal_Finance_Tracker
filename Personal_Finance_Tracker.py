@@ -10,11 +10,11 @@ st.write('Welcome to the app!')
 
 # Initialize session state
 if "transactions" not in st.session_state:
-    if os.path.exists("transactions.csv") and os.path.getsize("transactions.csv") > 0:
+    try:
         df = pd.read_csv("transactions.csv")
         st.session_state.transactions = df.to_dict("records")
-    else:
-        st.session_state.transactions=[]
+    except:
+        st.session_state.transactions = []
 
 # Sidebar to add transactions
 st.sidebar.header("Add transactions")
